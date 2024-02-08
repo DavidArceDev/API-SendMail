@@ -3,7 +3,7 @@ import { Agent } from './agent.entity';
 
 @Entity()
 export class Client {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'int' })
   id: number;
 
   @Column({ type: 'int' })
@@ -30,6 +30,9 @@ export class Client {
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   created: Date;
 
-  @OneToMany(() => Agent, agent => agent.client)
-  agents: Agent[];
+  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+  modified: Date;
+
+  /*@OneToMany(() => Agent, agent => agent.client)
+  agents: Agent[];*/
 }

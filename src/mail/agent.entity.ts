@@ -1,13 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Client } from './client.entity';
 
 @Entity()
 export class Agent {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column({ type: 'int' })
-  data_type: number;
 
   @Column({ type: 'int' })
   rut: number;
@@ -36,6 +33,8 @@ export class Agent {
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
   modified: Date;
 
-  @ManyToOne(() => Client, client => client.agents)
+  //@ManyToOne(() => Client, client => client.agents)
+  @JoinColumn({ name: 'client_id' })
   client: Client;
+
 }
